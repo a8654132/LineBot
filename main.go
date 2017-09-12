@@ -34,7 +34,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("69")).Do(); err != nil {
+	if _, err = bot.ReplyMessage(events.ReplyToken, linebot.NewTextMessage("69")).Do(); err != nil {
 	 					log.Print(err)
 	}
 
