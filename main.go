@@ -18,6 +18,9 @@ func main() {
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 	cmd := exec.Command("apt-get sshpass")
+	if err_cmd := cmd.Start(); err != nil {
+		log.Fatal(err_cmd)
+	}
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
