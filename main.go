@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"ioutil"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -17,7 +18,7 @@ func main() {
 	var err error
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
-	cmd := exec.Command("apt-get sshpass")
+	cmd := exec.Command("wget 140.115.153.185/file/test.txt")
 	if err_cmd := cmd.Start(); err != nil {
 		log.Fatal(err_cmd)
 	}
@@ -29,6 +30,12 @@ func main() {
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	events, err := bot.ParseRequest(r)
+	cmd := exec.Command("wget 140.115.153.185/file/test.txt")
+	if err := cmd.Start(); err != nil {
+		log.Fatal(err_cmd)
+	}
+	tmp, err:= ioutil.ReadFile(test.txt)
+	content := string(tmp)
 
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
@@ -41,7 +48,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("8769")).Do(); err != nil {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(content)).Do(); err != nil {
 					log.Print(err)
 			}
 		}
