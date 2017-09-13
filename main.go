@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"ioutil"
+	"io/ioutil"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
