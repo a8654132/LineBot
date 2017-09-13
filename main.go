@@ -18,10 +18,6 @@ func main() {
 	var err error
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
-	cmd := exec.Command("wget 140.115.153.185/file/test.txt")
-	if err := cmd.Start(); err != nil {
-		log.Fatal(err_cmd)
-	}
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
