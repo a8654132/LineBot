@@ -26,7 +26,7 @@ func main() {
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	events, err := bot.ParseRequest(r)
-	cmd := exec.Command("wget 140.115.153.185/file/test.txt")
+	cmd := exec.Command("wget", "http://140.115.153.185/file/test.txt")
 	if err := cmd.Start(); err != nil {
 		log.Fatal(err)
 	}
