@@ -1,4 +1,4 @@
-package redistest
+package LineBot
 
 import(
 	"github.com/garyburd/redigo/redis"
