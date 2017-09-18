@@ -4,6 +4,7 @@ import(
 	"github.com/garyburd/redigo/redis"
 	"fmt"
 	"log"
+	"strings"
 )
 
 var RedisPort = "6379"
@@ -18,6 +19,7 @@ func Redis_Get(KEY_NAME string) (string, int){
 	v, err := redis.Strings(c.Do("GET", KEY_NAME))
 	CheckError(err)
 	// fmt.Println(v)
+	strings.Join(v," ")
 	return v, 710
 }
 
