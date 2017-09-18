@@ -11,7 +11,7 @@ var RedisPort = "6379"
 var RedisIP = "140.115.153.185"
 
 
-func Redis_Get(KEY_NAME string) (string, int){
+func Redis_Get(KEY_NAME string) (string, error){
 	RedisIPPORT := fmt.Sprintf("%s:%s", RedisIP, RedisPort)
 	c, err := redis.Dial("tcp", RedisIPPORT)
     CheckError(err)
@@ -19,8 +19,8 @@ func Redis_Get(KEY_NAME string) (string, int){
 	v, err := redis.Strings(c.Do("GET", KEY_NAME))
 	CheckError(err)
 	// fmt.Println(v)
-	strings.Join(v," ")
-	return v, 710
+	x := strings.Join(v," ")
+	return x, err
 }
 
 func Redis_Set(KEY_NAME string, VAL string) int{

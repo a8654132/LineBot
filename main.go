@@ -34,7 +34,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	tmp, err:= ioutil.ReadFile("test.txt")
-	content := string(tmp)
+	// content := string(tmp)
 
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
@@ -49,9 +49,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
 			// strings.Join(prof,"")
-			Redis_Set(69,prof)
-			user, err := Redis_Get(69)
-			if _, err := bot.PushMessage(user, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
+			Redis_Set("69",prof)
+			if usr_prof, err := Redis_Get("69"); err != nil {
+					log.Print(err)
+			}
+			if _, err := bot.PushMessage(usr_prof, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
 					log.Print(err)
 			}
 		}
