@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
+	// "os/exec"
 	// "io/ioutil"
 	// "strings"
 	// "redistest"
@@ -29,10 +29,10 @@ func main() {
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	// prof, _ := linebot.DecodeToUserProfileResponse(r)
 	events, err := bot.ParseRequest(r)
-	cmd := exec.Command("wget", "-N", "http://140.115.153.185/file/test.txt")
-	if err := cmd.Start(); err != nil {
-		log.Fatal(err)
-	}
+	// cmd := exec.Command("wget", "-N", "http://140.115.153.185/file/test.txt")
+	// if err := cmd.Start(); err != nil {
+	// 	log.Println(err)
+	// }
 	//tmp, err:= ioutil.ReadFile("test.txt")
 	// content := string(tmp)
 
@@ -47,16 +47,16 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			prof := event.Source.UserID
-			// strings.Join(prof,"")
-			Redis_Set("69",prof)
-			// var usr_prof_tmp string
-			usr_prof, err := Redis_Get("69")
+			// prof := event.Source.UserID
+			// // strings.Join(prof,"")
+			// Redis_Set("69",prof)
+			// // var usr_prof_tmp string
+			// usr_prof, err := Redis_Get("69")
 			if err != nil {
 					log.Print(err)
 			}
 			// usr_prof := usr_prof_tmp
-			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world"+usr_prof) ).Do(); err != nil {
+			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world") ).Do(); err != nil {
 					log.Print(err)
 			}
 		}
