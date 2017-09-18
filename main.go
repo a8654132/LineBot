@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"io/ioutil"
+	"redistest"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -46,7 +47,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
-			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(content+prof)).Do(); err != nil {
+			redistest.Redis_Set(69,prof)
+			user := redistest.Redis_Get(69)
+			if _, err = bot.PushMessage(user,"TEST").Do(); err != nil {
 					log.Print(err)
 			}
 		}
