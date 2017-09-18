@@ -1,5 +1,5 @@
 
-package main
+package LineBot
 
 import (
 	"fmt"
@@ -8,7 +8,8 @@ import (
 	"os"
 	"os/exec"
 	"io/ioutil"
-	// "redistest"
+	"redistest"
+
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
