@@ -52,11 +52,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			// Redis_Set("69",prof)
 			// // var usr_prof_tmp string
 			// usr_prof, err := Redis_Get("69")
-			if err != nil {
-					log.Print(err)
-			}
+			// if err != nil {
+			// 		log.Print(err)
+			// }
 			// usr_prof := usr_prof_tmp
-			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world") ).Do(); err != nil {
+			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
 					log.Print(err)
 			}
 		}
