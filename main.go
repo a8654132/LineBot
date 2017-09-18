@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"io/ioutil"
+	// "io/ioutil"
 	// "strings"
 	// "redistest"
 
@@ -33,7 +33,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	if err := cmd.Start(); err != nil {
 		log.Fatal(err)
 	}
-	tmp, err:= ioutil.ReadFile("test.txt")
+	//tmp, err:= ioutil.ReadFile("test.txt")
 	// content := string(tmp)
 
 	if err != nil {
@@ -50,10 +50,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			prof := event.Source.UserID
 			// strings.Join(prof,"")
 			Redis_Set("69",prof)
-			if usr_prof, err := Redis_Get("69"); err != nil {
+			// var usr_prof_tmp string
+			usr_prof, err := Redis_Get("69")
+			if err != nil {
 					log.Print(err)
 			}
-			if _, err := bot.PushMessage(usr_prof, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
+			// usr_prof := usr_prof_tmp
+			if _, err := bot.PushMessage(usr_prof, linebot.NewTextMessage("Hello, world") ).Do(); err != nil {
 					log.Print(err)
 			}
 		}
