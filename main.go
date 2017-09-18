@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"io/ioutil"
+	"strings"
 	// "redistest"
 
 
@@ -47,6 +48,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
+			strings.Join(prof,"")
 			Redis_Set(69,prof)
 			user, err := Redis_Get(69)
 			if _, err := bot.PushMessage(user, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
