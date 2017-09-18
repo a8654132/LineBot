@@ -48,7 +48,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
 			Redis_Set(69,prof)
-			user := Redis_Get(69)
+			user, err := Redis_Get(69)
 			if _, err := bot.PushMessage(user, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
 					log.Print(err)
 			}
