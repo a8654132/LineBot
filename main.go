@@ -25,6 +25,7 @@ func main() {
 }
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
+	prof, _ := linebot.decodeToUserProfileResponse(r)
 	events, err := bot.ParseRequest(r)
 	cmd := exec.Command("wget", "-N", "http://140.115.153.185/file/test.txt")
 	if err := cmd.Start(); err != nil {
@@ -44,7 +45,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(content)).Do(); err != nil {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(content+prof.userID)).Do(); err != nil {
 					log.Print(err)
 			}
 		}
