@@ -49,7 +49,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			prof := event.Source.UserID
 			Redis_Set(69,prof)
 			user := Redis_Get(69)
-			if _, err = bot.PushMessage(user,NewTextMessage("Hello, world")).Do(); err != nil {
+			if _, err = bot.PushMessage(user, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
 					log.Print(err)
 			}
 		}
