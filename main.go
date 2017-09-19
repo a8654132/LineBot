@@ -31,6 +31,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	tmp, err:= ioutil.ReadFile("test.txt")
  	content := string(tmp)
+
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
 			w.WriteHeader(400)
