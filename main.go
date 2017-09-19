@@ -1,3 +1,4 @@
+
 package main
 
 import (
@@ -5,9 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	// "context"
-	// "time"
-
+	"io/ioutil"
+	"os/exec"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -26,7 +26,12 @@ func main() {
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	events, err := bot.ParseRequest(r)
-
+	cmd := exec.Command("wget", "-N", "http://140.115.153.185/file/test.txt")
+	if err := cmd.Start(); err != nil {
+		log.Fatal(err)
+	}
+	tmp, err:= ioutil.ReadFile("test.txt")
+ 	content := string(tmp)
 
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
@@ -36,21 +41,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Millisecond)
-	// defer cancel()
+
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			prof := event.Source.UserID
-			// fmt.Println(prof)
-			if _, err := bot.PushMessage(prof, linebot.NewTextMessage("Hello, world"+prof)).Do(); err != nil {
-
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(content)).Do(); err != nil {
 					log.Print(err)
 			}
 		}
 	}
-
-
-
-
-
 }
