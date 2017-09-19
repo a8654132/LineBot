@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-
+	"context"
 
 
 	"github.com/line/line-bot-sdk-go/linebot"
@@ -35,15 +35,22 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Millisecond)
+	defer cancel()
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
-			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world"+prof)).Do(); err != nil {
+			if _, err := bot.PushMessage(prof, linebot.NewTextMessage("Hello, world"+prof)).WithContext(ctx).Do(); err != nil {
+					if err != context.DeadlineExceeded {
+						t.Errorf("err %v; want %v", err, context.DeadlineExceeded)
+					}
 					log.Print(err)
 			}
 		}
 	}
+
+
+
 
 
 }
