@@ -39,11 +39,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Millisecond)
 	// defer cancel()
 	for _, event := range events {
+		if event.Type == linebot.EventTypeFollow {
+			prof := event.Source.UserID
+			// fmt.Println(prof)
+			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
+					log.Print(err)
+			}
+		}
+
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
 			// fmt.Println(prof)
 			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
-
 					log.Print(err)
 			}
 		}
