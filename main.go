@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"context"
-	"time"
+	// "context"
+	// "time"
 
 
 	"github.com/line/line-bot-sdk-go/linebot"
@@ -36,8 +36,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Millisecond)
-	defer cancel()
+	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Millisecond)
+	// defer cancel()
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
