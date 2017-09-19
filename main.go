@@ -42,9 +42,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
 			if _, err := bot.PushMessage(prof, linebot.NewTextMessage("Hello, world"+prof)).WithContext(ctx).Do(); err != nil {
-					if err != context.DeadlineExceeded {
-						t.Errorf("err %v; want %v", err, context.DeadlineExceeded)
-					}
+					// if err != context.DeadlineExceeded {
+					// 	t.Errorf("err %v; want %v", err, context.DeadlineExceeded)
+					// }
 					log.Print(err)
 			}
 		}
