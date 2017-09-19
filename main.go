@@ -51,7 +51,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			// fmt.Println(prof)
 			binary, _ := Redis_Get(mac)
 			user := new(USER_MAC)
-			json.Unmarshal(binary,user)
+			json.Unmarshal(binary,&user)
 			var allcontent string
 			for i:=0;i < len(user.USER) ; i++{
 				allcontent = allcontent+user.USER[i].CONTENT
