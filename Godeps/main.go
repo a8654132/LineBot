@@ -42,7 +42,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
 			// fmt.Println(prof)
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
+			if _, err := bot.PushMessage(prof, linebot.NewTextMessage("Hello, world"+prof)).Do(); err != nil {
 
 					log.Print(err)
 			}
