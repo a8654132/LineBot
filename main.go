@@ -38,8 +38,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-
-			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
+			prof := event.Source.UserID
+			if _, err := bot.PushMessage(prof, linebot.NewTextMessage("Hello, world"+prof)).Do(); err != nil {
 					log.Print(err)
 			}
 		}
