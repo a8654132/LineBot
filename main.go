@@ -7,7 +7,7 @@ import (
 	"os"
 	// "context"
 	// "time"
-
+	"encoding/json"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -41,7 +41,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeFollow {
 			prof := event.Source.UserID
-			// fmt.Println(prof)
+
 			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
 					log.Print(err)
 			}
@@ -50,7 +50,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
 			// fmt.Println(prof)
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
+			binary, _ := Redis_Get(mac)
+			user := new(USER_MAC)
+			json.Unmarshal(binary,user)
+			var allcontent string
+			for i:=0;i < len(user.USER) ; i++{
+				allcontent = allcontent+user.USER[i].CONTENT
+			}
+			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", allcontent).Do(); err != nil {
 					log.Print(err)
 			}
 		}
