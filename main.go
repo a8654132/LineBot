@@ -40,7 +40,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 
 			if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("Hello, world")).Do(); err != nil {
-					log.Print(err)
+					// log.Print(err)
 			}
 		}
 	}
