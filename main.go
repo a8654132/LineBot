@@ -41,8 +41,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
 			prof := event.Source.UserID
+			fmt.Println(prof)
 			if _, err := bot.PushMessage(prof, linebot.NewTextMessage("Hello, world"+prof)).Do(); err != nil {
-				
+
 					log.Print(err)
 			}
 		}
