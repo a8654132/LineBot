@@ -1,4 +1,4 @@
-package LineBot
+package main
 
 import (
 	"fmt"
