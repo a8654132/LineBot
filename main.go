@@ -19,8 +19,7 @@ func main() {
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 	for i :=0 ; i<5 ; i++ {
-		time.NewTimer(time.Second * 2)
-		time.Sleep(time.Minute * 2)
+		time.NewTimer(time.Second * 5)
 		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
 	}
 	http.HandleFunc("/callback", callbackHandler)
