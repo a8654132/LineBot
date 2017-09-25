@@ -23,9 +23,12 @@ func main() {
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)
 
-	if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好!")).Do(); err != nil {
-			log.Print(err)
-	}
+
+				setTimeout(function(){
+				    var userId = "Uecc089487f1487a78637be4e2fe3dca9";
+				    var sendMsg = "你好";
+				    bot.PushMessage(userId,linebot.NewTextMessage(sendMsg)).Do();
+				},5000);
 }
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
