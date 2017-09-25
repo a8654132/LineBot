@@ -50,7 +50,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			)
 
 			if _, err := bot.ReplyMessage(event.ReplyToken,linebot.NewTemplateMessage("TEST", template)).Do(); err != nil {
-				Println(err)
+				log.Println(err)
 			}
 
 
