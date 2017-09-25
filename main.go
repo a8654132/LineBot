@@ -35,7 +35,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	// defer cancel()
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			imageURL := app.appBaseURL + "/static/buttons/1040.jpg"
+			imageURL := "/static/buttons/1040.jpg"
 			template := linebot.NewCarouselTemplate(
 				linebot.NewCarouselColumn(
 					imageURL, "hoge", "fuga",
@@ -49,8 +49,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				),
 			)
 
-			if _, err := bot.ReplyMessage(event.replyToken,linebot.NewTemplateMessage("TEST", template)).Do(); err != nil {
-				Fatal(err)
+			if _, err := bot.ReplyMessage(event.ReplyToken,linebot.NewTemplateMessage("TEST", template)).Do(); err != nil {
+				Println(err)
 			}
 
 
