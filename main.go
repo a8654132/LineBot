@@ -5,9 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	// "context"
 	"time"
-	//"encoding/json"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -17,16 +15,7 @@ func main() {
 	var err error
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
-
 	http.HandleFunc("/callback", callbackHandler)
-
-	for i :=0 ; i<5 ; i++ {
-		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
-		time.Sleep(time.Second * 10)
-	}
-
-	bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("OVER")).Do()
-
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)
@@ -46,12 +35,28 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Millisecond)
 	// defer cancel()
 	for _, event := range events {
-		if event.Type == linebot.EventTypeFollow {
-			prof := event.Source.UserID
+		if event.Type == linebot.EventTypeMessage {
 
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
-					log.Print(err)
+			template := linebot.NewCarouselTemplate(
+				linebot.NewCarouselColumn(
+					imageURL, "hoge", "fuga",
+					linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
+					linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+				),
+				linebot.NewCarouselColumn(
+					imageURL, "hoge", "fuga",
+					linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
+					linebot.NewMessageTemplateAction("Say message", "Rice=米"),
+				),
+			)
+
+			if _, err := bot.ReplyMessage(replyToken,linebot.NewTemplateMessage("TEST", template)).Do(); err != nil {
+				return err
 			}
+
+
+
+
 		}
 	}
 }
