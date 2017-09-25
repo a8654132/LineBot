@@ -20,7 +20,7 @@ func main() {
 
 	http.HandleFunc("/callback", callbackHandler)
 
-	imageURL := "https://cdn.free.com.tw/blog/wp-content/uploads/2014/08/Placekitten480-g.jpg"
+	imageURL := ""
 	template := linebot.NewButtonsTemplate(
 			imageURL, "哈囉你好!", "我相信這次會成功的",
 			linebot.NewURITemplateAction("來看看卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
