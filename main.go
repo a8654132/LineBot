@@ -20,16 +20,18 @@ func main() {
 
 	http.HandleFunc("/callback", callbackHandler)
 
-	imageURL := ""
+
 	template := linebot.NewButtonsTemplate(
-			imageURL, "哈囉你好!", "我相信這次會成功的",
+			"", "哈囉你好!", "我相信這次會成功的",
 			linebot.NewURITemplateAction("來看看卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
-			linebot.NewMessageTemplateAction("Say hello!", "你好"),
+			linebot.NewMessageTemplateAction("Say hello! 1", "你好"),
+			linebot.NewMessageTemplateAction("Say hello! 2", "我好"),
+			linebot.NewMessageTemplateAction("Say hello! 3", "大家好"),
 	)
 
 	bot.PushMessage(
 		"Uecc089487f1487a78637be4e2fe3dca9",
-		linebot.NewTemplateMessage("TEST", template)).Do()
+		linebot.NewTemplateMessage("這是一個成功的Button", template)).Do()
 
 
 	port := os.Getenv("PORT")
