@@ -27,9 +27,7 @@ func main() {
 
 func setTime(){
 			time.NewTimer(time.Second * 2)
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do(); err != nil {
-					log.Print(err)
-			}
+			bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
 	}
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
