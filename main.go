@@ -35,27 +35,18 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	// defer cancel()
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			imageURL := "/static/buttons/1040.jpg"
-			template := linebot.NewCarouselTemplate(
-				linebot.NewCarouselColumn(
-					imageURL, "hoge", "fuga",
-					linebot.NewURITemplateAction("Go to line.me", "https://line.me"),
+			imageURL := "https://i.pximg.net/c/600x600/img-master/img/2017/05/05/20/44/05/62754624_p0_master1200.jpg"
+			template := linebot.NewButtonsTemplate(
+					imageURL, "A", "B",
+					linebot.NewURITemplateAction("來看看卡莉", "https://i.pximg.net/c/600x600/img-master/img/2017/05/05/20/44/05/62754624_p0_master1200.jpg"),
 					linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
-				),
-				linebot.NewCarouselColumn(
-					imageURL, "hoge", "fuga",
-					linebot.NewPostbackTemplateAction("言 hello2", "hello こんにちは", "hello こんにちは"),
-					linebot.NewMessageTemplateAction("Say message", "Rice=米"),
-				),
 			)
 
-			if _, err := bot.ReplyMessage(event.ReplyToken,linebot.NewTemplateMessage("TEST", template)).Do(); err != nil {
+			if _, err := bot.ReplyMessage(
+				event.ReplyToken,
+				linebot.NewTemplateMessage("TEST", template)).Do(); err != nil {
 				log.Println(err)
 			}
-
-
-
-
 		}
 	}
 }
