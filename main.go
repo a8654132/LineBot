@@ -21,6 +21,7 @@ func main() {
 	for i :=0 ; i<5 ; i++ {
 		time.NewTimer(time.Second * 5)
 		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
+		time.Sleep(time.Minute * 1)
 	}
 	http.HandleFunc("/callback", callbackHandler)
 	port := os.Getenv("PORT")
