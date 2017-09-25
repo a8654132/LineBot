@@ -38,8 +38,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			imageURL := "https://i.pximg.net/c/600x600/img-master/img/2017/05/05/20/44/05/62754624_p0_master1200.jpg"
 			template := linebot.NewButtonsTemplate(
 					imageURL, "A", "B",
-					linebot.NewURITemplateAction("來看看卡莉", "https://i.pximg.net/c/600x600/img-master/img/2017/05/05/20/44/05/62754624_p0_master1200.jpg"),
-					linebot.NewPostbackTemplateAction("Say hello1", "hello こんにちは", ""),
+					linebot.NewURITemplateAction("來看看卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
+					linebot.NewMessageTemplateAction("Say hello1", "你好"),
 			)
 
 			if _, err := bot.ReplyMessage(
