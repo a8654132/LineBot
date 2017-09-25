@@ -21,8 +21,7 @@ func main() {
 	http.HandleFunc("/callback", callbackHandler)
 
 	for i :=0 ; i<5 ; i++ {
-		now := time.Now()
-		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!"+now)).Do()
+		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
 		time.Sleep(time.Second * 10)
 	}
 
