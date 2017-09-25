@@ -56,7 +56,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			for i:=0;i < len(user.USER) ; i++{
 				allcontent = allcontent+user.USER[i].CONTENT
 			}
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage(allcontent)).Do(); err != nil {
+			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好!"+allcontent)).Do(); err != nil {
 					log.Print(err)
 			}
 		}
