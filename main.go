@@ -21,9 +21,11 @@ func main() {
 	http.HandleFunc("/callback", callbackHandler)
 
 	for i :=0 ; i<5 ; i++ {
-		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
-		time.Sleep(time.Minute * 2)
+		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!"+time.Local)).Do()
+		time.Sleep(time.Second * 10)
 	}
+
+	bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("OVER")).Do()
 
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
