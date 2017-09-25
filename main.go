@@ -22,6 +22,10 @@ func main() {
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)
+
+	if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好!")).Do(); err != nil {
+			log.Print(err)
+	}
 }
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
@@ -48,9 +52,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好!")).Do(); err != nil {
-					log.Print(err)
-			}
 
 
 }
