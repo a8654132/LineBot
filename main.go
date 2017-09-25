@@ -47,23 +47,13 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		if event.Type == linebot.EventTypeMessage {
-			// fmt.Println(prof)
-			binary, _ := Redis_Get(mac)
-			user := new(USER_MAC)
-			json.Unmarshal(binary,&user)
-			var allcontent string
-			for i:=0;i < len(user.USER) ; i++{
-				allcontent = allcontent+user.USER[i].CONTENT
-			}
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好!"+allcontent)).Do(); err != nil {
+
+			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好!")).Do(); err != nil {
 					log.Print(err)
 			}
-		}
-	}
 
 
-
+}
 
 
 }
