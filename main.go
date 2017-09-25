@@ -35,11 +35,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	// defer cancel()
 	for _, event := range events {
 		if event.Type == linebot.EventTypeMessage {
-			imageURL := "https://i.pximg.net/c/600x600/img-master/img/2017/05/05/20/44/05/62754624_p0_master1200.jpg"
+			imageURL := "https://cdn.free.com.tw/blog/wp-content/uploads/2014/08/Placekitten480-g.jpg"
 			template := linebot.NewButtonsTemplate(
-					imageURL, "A", "B",
+					imageURL, "哈囉你好!", "我相信這次會成功的",
 					linebot.NewURITemplateAction("來看看卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
-					linebot.NewMessageTemplateAction("Say hello1", "你好"),
+					linebot.NewMessageTemplateAction("Say hello!", "你好"),
 			)
 
 			if _, err := bot.ReplyMessage(
