@@ -8,7 +8,6 @@ import (
 	// "context"
 	"time"
 	//"encoding/json"
-
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -23,7 +22,7 @@ func main() {
 
 	for i :=0 ; i<5 ; i++ {
 		bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("你好呀!")).Do()
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Minute * 2)
 	}
 
 	port := os.Getenv("PORT")
@@ -33,7 +32,6 @@ func main() {
 
 func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	events, err := bot.ParseRequest(r)
-
 
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
@@ -53,11 +51,5 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Print(err)
 			}
 		}
-
-
-
-
-}
-
-
+	}
 }
