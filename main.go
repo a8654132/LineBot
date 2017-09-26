@@ -7,7 +7,7 @@ import (
 	"os"
 	// "context"
 	//"time"
-	//"encoding/json"
+	"encoding/json"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
