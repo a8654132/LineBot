@@ -26,7 +26,7 @@ func main() {
 	binary, _ := Redis_Get(mac)
 	user := new(USER_MAC)
 	json.Unmarshal(binary,&user)
-	onlyonecontent := user.USER[0].CONTENT
+	onlyonecontent := user.USER[1].CONTENT
 	// var allcontent string
 	 // for i:=0;i < len(user.USER) ; i++{
 	 //  allcontent = allcontent+user.USER[i].CONTENT
