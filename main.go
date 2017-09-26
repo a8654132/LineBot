@@ -26,17 +26,21 @@ func main() {
 	binary, _ := Redis_Get(mac)
 	user := new(USER_MAC)
 	json.Unmarshal(binary,&user)
-	onlyonecontent := user.USER[1].KEYWORD
+	onlyonecontent := user.USER[0].CONTENT
 	// var allcontent string
 	 // for i:=0;i < len(user.USER) ; i++{
 	 //  allcontent = allcontent+user.USER[i].CONTENT
 	 // }
 
 	template := linebot.NewButtonsTemplate(
-			"", "以下是擷取的內文：" , "你好" + onlyonecontent ,
+			"", "以下是擷取的內文：" , "你好" ,
 			linebot.NewPostbackTemplateAction("滿意 :)", "Y" , ""),
 			linebot.NewPostbackTemplateAction("不滿意 :(", "N" , ""),
 	)
+
+	bot.PushMessage(
+		"Uecc089487f1487a78637be4e2fe3dca9",
+		linebot.NewTextMessage(onlyonecontent)).Do()
 
 	bot.PushMessage(
 		"Uecc089487f1487a78637be4e2fe3dca9",
