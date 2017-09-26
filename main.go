@@ -20,20 +20,6 @@ func main() {
 
 	http.HandleFunc("/callback", callbackHandler)
 
-
-	template := linebot.NewButtonsTemplate(
-			"", "哈囉你好!", "我相信這次會成功的",
-			linebot.NewURITemplateAction("來看看卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
-			linebot.NewMessageTemplateAction("Say hello! 1", "你好"),
-			linebot.NewMessageTemplateAction("Say hello! 2", "我好"),
-			linebot.NewMessageTemplateAction("Say hello! 3", "大家好"),
-	)
-
-	bot.PushMessage(
-		"Uecc089487f1487a78637be4e2fe3dca9",
-		linebot.NewTemplateMessage("這是一個成功的Button", template)).Do()
-
-
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)
@@ -55,9 +41,24 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	for _, event := range events {
 		if event.Type == linebot.EventTypeFollow {
 			prof := event.Source.UserID
+			follow := linebot.NewButtonsTemplate(
+					"", "歡迎您使用本服務!", "你好，我是中央大學的曾怡雯，\n請按以下按鈕做出對應的動作:",
+					linebot.NewPostbackTemplateAction("我要輸入我的MAC", "AddMAC",""),
+					linebot.NewPostbackTemplateAction("我要更正我的MAC", "ModifyMAC",""),
+					linebot.NewURITemplateAction("我想看怡雯畫的阿卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
+			)
 
-			if _, err := bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("Hello, world\n"+prof)).Do(); err != nil {
+			if _, err := bot.PushMessage(prof, linebot.NewTemplateMessage("Smart AP <3", follow)).Do(); err != nil {
 					log.Print(err)
+			}
+			if event.Type == linebot.EventTypePostback{
+				data := event.Postback.Data
+				if data == "AddMac"{
+					 bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC:")).Do()
+				}
+				if data == "ModifyMAC"{
+					bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC:")).Do()
+				}
 			}
 		}
 	}
