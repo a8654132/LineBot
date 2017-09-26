@@ -42,7 +42,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeFollow {
 			prof := event.Source.UserID
 			follow := linebot.NewButtonsTemplate(
-					"", "歡迎您使用本服務!", "你好，我是中央大學的曾怡雯，\n請按以下按鈕做出對應的動作:",
+					"", "歡迎您使用本服務!", "你好，我是中央大學的曾怡雯，\n請按以下按鈕做出對應的動作：",
 					linebot.NewPostbackTemplateAction("我要輸入我的MAC", "AddMAC",""),
 					linebot.NewPostbackTemplateAction("我要更正我的MAC", "ModifyMAC",""),
 					linebot.NewURITemplateAction("我想看怡雯畫的阿卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
@@ -51,14 +51,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			if _, err := bot.PushMessage(prof, linebot.NewTemplateMessage("Smart AP <3", follow)).Do(); err != nil {
 					log.Print(err)
 			}
-			if event.Type == linebot.EventTypePostback{
-				data := event.Postback.Data
-				if data == "AddMAC"{
-					 bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("現在請輸入你的MAC:")).Do()
-				}
-				if data == "ModifyMAC"{
-					bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("現在請輸入你要更正的MAC:")).Do()
-				}
+			data := event.Postback.Data
+			if data == "AddMAC"{
+				 bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do()
+			}
+			if data == "ModifyMAC"{
+				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do()
 			}
 		}
 	}
