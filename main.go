@@ -51,17 +51,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			if _, err := bot.PushMessage(prof, linebot.NewTemplateMessage("Smart AP <3", follow)).Do(); err != nil {
 					log.Print(err)
 			}
-
+		}
+		if event.Type == linebot.EventTypePostback {
 			data := event.Postback.Data
 			if data == "AddMAC"{
-				 if _, err := bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do(); err != nil {
-	 					log.Print(err)
-	 			}
+				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do()
 			}
 			if data == "ModifyMAC"{
-				if _, err := bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do(); err != nil {
-						log.Print(err)
-				}
+				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do()
 			}
 		}
 	}
