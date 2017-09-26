@@ -22,13 +22,14 @@ func main() {
 
 
 	// fmt.Println(prof)
-	binary, _ := Redis_Get(mac)
-	user := new(USER_MAC)
-	json.Unmarshal(binary,&user)
-	var allcontent string
-	for i:=0;i < len(user.USER) ; i++{
-		allcontent = allcontent+user.USER[i].CONTENT
-	}
+	
+	// binary, _ := Redis_Get(mac)
+	// user := new(USER_MAC)
+	// json.Unmarshal(binary,&user)
+	// var allcontent string
+	// for i:=0;i < len(user.USER) ; i++{
+	// 	allcontent = allcontent+user.USER[i].CONTENT
+	// }
 
 	template := linebot.NewButtonsTemplate(
 			"", "以下是擷取的內文：" , "你好" ,
