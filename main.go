@@ -31,7 +31,7 @@ func main() {
 	}
 
 	template := linebot.NewButtonsTemplate(
-			"", "以下是擷取的內文：" , "你好"+allcontent ,
+			"", "以下是擷取的內文：" , "你好" ,
 			linebot.NewMessageTemplateAction("滿意 :)", ""),
 			linebot.NewMessageTemplateAction("不滿意 :(", ""),
 	)
