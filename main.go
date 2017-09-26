@@ -53,6 +53,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		if event.Type == linebot.EventTypePostback {
+			prof := event.Source.UserID
 			data := event.Postback.Data
 			if data == "AddMAC"{
 				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do()
