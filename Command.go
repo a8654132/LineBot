@@ -8,7 +8,7 @@ import(
 
 var RedisPort = "6379"
 var RedisIP = "140.115.153.185"
-var mac = "f0:7b:cb:a3:d5:24"
+var mac = "8c:a9:82:03:3d:68"
 func Redis_Get(KEY_NAME string) ([]byte, error){
 	RedisIPPORT := fmt.Sprintf("%s:%s", RedisIP, RedisPort)
 	c, err := redis.Dial("tcp", RedisIPPORT)

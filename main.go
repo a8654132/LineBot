@@ -32,13 +32,8 @@ func main() {
 	 //  allcontent = allcontent+user.USER[i].CONTENT
 	 // }
 
-	// binary, _ := Redis_Get(mac)
-	// user := new(USER_MAC)
-	// json.Unmarshal(binary,&user)
-	// allcontent := user.USER[0].CONTENT
-
 	template := linebot.NewButtonsTemplate(
-			"", "以下是擷取的內文：" , "你好"+onlyonecontent ,
+			"", "以下是擷取的內文：" , onlyonecontent ,
 			linebot.NewPostbackTemplateAction("滿意 :)", "Y" , ""),
 			linebot.NewPostbackTemplateAction("不滿意 :(", "N" , ""),
 	)
