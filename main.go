@@ -20,6 +20,27 @@ func main() {
 
 	http.HandleFunc("/callback", callbackHandler)
 
+
+	// fmt.Println(prof)
+	binary, _ := Redis_Get(mac)
+	user := new(USER_MAC)
+	json.Unmarshal(binary,&user)
+	var allcontent string
+	for i:=0;i < len(user.USER) ; i++{
+		allcontent = allcontent+user.USER[i].CONTENT
+	}
+
+	template := linebot.NewButtonsTemplate(
+			"", "以下是擷取的內文：" , "你好"+allcontent ,
+			linebot.NewMessageTemplateAction("滿意 :)", ""),
+			linebot.NewMessageTemplateAction("不滿意 :(", ""),
+	)
+
+	bot.PushMessage(
+		"Uecc089487f1487a78637be4e2fe3dca9",
+		linebot.NewTemplateMessage("今日文章", template)).Do()
+
+
 	port := os.Getenv("PORT")
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)
@@ -57,6 +78,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			data := event.Postback.Data
 			if data == "AddMAC"{
 				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do()
+
 			}
 			if data == "ModifyMAC"{
 				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do()
