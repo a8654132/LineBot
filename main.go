@@ -7,7 +7,7 @@ import (
 	"os"
 	// "context"
 	//"time"
-	//"encoding/json"
+	"encoding/json"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -23,21 +23,26 @@ func main() {
 
 
 	// fmt.Println(prof)
+	binary, _ := Redis_Get(mac)
+	user := new(USER_MAC)
+	json.Unmarshal(binary,&user)
+	onlyonecontent := user.USER[0].CONTENT
+	// var allcontent string
+	 // for i:=0;i < len(user.USER) ; i++{
+	 //  allcontent = allcontent+user.USER[i].CONTENT
+	 // }
 
 	// binary, _ := Redis_Get(mac)
 	// user := new(USER_MAC)
 	// json.Unmarshal(binary,&user)
-	// var allcontent string
-	// for i:=0;i < len(user.USER) ; i++{
-	// 	allcontent = allcontent+user.USER[i].CONTENT
-	// }
+	// allcontent := user.USER[0].CONTENT
 
 	template := linebot.NewButtonsTemplate(
-			"", "以下是擷取的內文：" , "你好" ,
+			"", "以下是擷取的內文：" , onlyonecontent ,
 			linebot.NewPostbackTemplateAction("滿意 :)", "Y" , ""),
 			linebot.NewPostbackTemplateAction("不滿意 :(", "N" , ""),
 	)
-	
+
 	bot.PushMessage(
 		"Uecc089487f1487a78637be4e2fe3dca9",
 		linebot.NewTemplateMessage("今日文章", template)).Do()
