@@ -33,7 +33,7 @@ func main() {
 	 // }
 
 	template := linebot.NewButtonsTemplate(
-			"", "以下是擷取的內文：" , onlyonecontent ,
+			"", "以下是擷取的內文：" , "你好" + onlyonecontent ,
 			linebot.NewPostbackTemplateAction("滿意 :)", "Y" , ""),
 			linebot.NewPostbackTemplateAction("不滿意 :(", "N" , ""),
 	)
