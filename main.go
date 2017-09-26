@@ -54,10 +54,14 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 			data := event.Postback.Data
 			if data == "AddMAC"{
-				 if _, err := bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do()
+				 if _, err := bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do(); err != nil {
+	 					log.Print(err)
+	 			}
 			}
 			if data == "ModifyMAC"{
-				if _, err := bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do()
+				if _, err := bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do(); err != nil {
+						log.Print(err)
+				}
 			}
 		}
 	}
