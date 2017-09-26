@@ -18,6 +18,16 @@ func main() {
 	bot, err = linebot.New(os.Getenv("ChannelSecret"), os.Getenv("ChannelAccessToken"))
 	log.Println("Bot:", bot, " err:", err)
 
+	// template := linebot.NewButtonsTemplate(
+	// 		"", "以下是擷取的內文：" , "你好" ,
+	// 		linebot.NewMessageTemplateAction("滿意 :)", ""),
+	// 		linebot.NewMessageTemplateAction("不滿意 :(", ""),
+	// )
+	//
+	// bot.PushMessage(
+	// 	"Uecc089487f1487a78637be4e2fe3dca9",
+	// 	linebot.NewTemplateMessage("今日文章", template)).Do()
+	//
 	http.HandleFunc("/callback", callbackHandler)
 
 
@@ -31,15 +41,19 @@ func main() {
 	// 	allcontent = allcontent+user.USER[i].CONTENT
 	// }
 
-	template := linebot.NewButtonsTemplate(
-			"", "以下是擷取的內文：" , "你好" ,
-			linebot.NewMessageTemplateAction("滿意 :)", ""),
-			linebot.NewMessageTemplateAction("不滿意 :(", ""),
-	)
 
-	bot.PushMessage(
-		"Uecc089487f1487a78637be4e2fe3dca9",
-		linebot.NewTemplateMessage("今日文章", template)).Do()
+		template := linebot.NewButtonsTemplate(
+				"", "哈囉你好!", "我相信這次會成功的",
+				linebot.NewURITemplateAction("來看看卡莉", "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=62861397"),
+				linebot.NewMessageTemplateAction("Say hello! 1", "你好"),
+				linebot.NewMessageTemplateAction("Say hello! 2", "我好"),
+				linebot.NewMessageTemplateAction("Say hello! 3", "大家好"),
+		)
+
+		bot.PushMessage(
+			"Uecc089487f1487a78637be4e2fe3dca9",
+			linebot.NewTemplateMessage("這是一個成功的Button", template)).Do()
+
 
 
 	port := os.Getenv("PORT")
@@ -79,7 +93,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			data := event.Postback.Data
 			if data == "AddMAC"{
 				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC：")).Do()
-
 			}
 			if data == "ModifyMAC"{
 				bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC：")).Do()
