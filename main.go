@@ -7,7 +7,7 @@ import (
 	"os"
 	// "context"
 	//"time"
-	"encoding/json"
+	//"encoding/json"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -22,7 +22,7 @@ func main() {
 
 
 	// fmt.Println(prof)
-	
+
 	// binary, _ := Redis_Get(mac)
 	// user := new(USER_MAC)
 	// json.Unmarshal(binary,&user)
