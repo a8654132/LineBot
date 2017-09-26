@@ -53,11 +53,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			if event.Type == linebot.EventTypePostback{
 				data := event.Postback.Data
-				if data == "AddMac"{
-					 bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你的MAC:")).Do()
+				if data == "AddMAC"{
+					 bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("現在請輸入你的MAC:")).Do()
 				}
 				if data == "ModifyMAC"{
-					bot.PushMessage(prof, linebot.NewTextMessage("現在請輸入你要更正的MAC:")).Do()
+					bot.PushMessage("Uecc089487f1487a78637be4e2fe3dca9", linebot.NewTextMessage("現在請輸入你要更正的MAC:")).Do()
 				}
 			}
 		}
