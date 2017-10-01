@@ -33,7 +33,7 @@ func main() {
 	 // }
 
 	template := linebot.NewButtonsTemplate(
-			"", "請告訴我們您對於以上文章的評價" , "" ,
+			"", "請告訴我們，您對於以上文章的評價" , "" ,
 			linebot.NewPostbackTemplateAction("滿意 :)", "Y" , ""),
 			linebot.NewPostbackTemplateAction("不滿意 :(", "N" , ""),
 	)
